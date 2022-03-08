@@ -1,6 +1,9 @@
 This project will be a GPS app of sorts that allows users to find the best location halfway between them to meet up at.
 
-
+###
+We want to use React and nodejs to code this, for the frontend and backend respectively. 
+Google Maps and React have some APIs we can draw from to use.
+###
 
 Below are the important links and documents for the project.
 
