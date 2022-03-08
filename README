@@ -2,7 +2,8 @@ This project will be a GPS app of sorts that allows users to find the best locat
 
 ###
 We want to use React and nodejs to code this, for the frontend and backend respectively. 
-Google Maps and React have some APIs we can draw from to use.
+Google Maps and React have some APIs we can draw from to use. 
+If we can't use google maps we have alternatives to select from.
 ###
 
 Below are the important links and documents for the project.
