@@ -11,6 +11,10 @@ INSTALLATION:
 -------------
 1. Download directory to system with nodejs and react native installed.
 2. Once all is installed and downloaded, run command "npm install" and wait for npm directories to be installed.
+   -run "npm install @mui/material @emotion/react @emotion/styled"
+   -run "npm install react-icons"
+   -run "npm install react-router-dom"
+   -run "npm install styled-components"
 3. To run program, run command "npm start" and you will be redirected to web browser.
 =============
 
