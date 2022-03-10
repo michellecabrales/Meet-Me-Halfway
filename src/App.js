@@ -6,10 +6,12 @@ import background from './images/drive.png'
 
 function App() {
   return (
-    <Router>
+    <>
+      <Router>
         <NavBar />
-    </Router>
-    <img src={background} width="100%" style={{opacity: 0.5}}/> 
+      </Router>
+      <img src={background} width="100%" style={{opacity: 0.5}}/> 
+  </>
   );
 }
 export default App;
