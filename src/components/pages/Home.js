@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import PlacesAutocomplete from 'react-places-autocomplete';
 import { geocodeByAddress, geocodeByPlaceId, getLatLng } from 'react-places-autocomplete';
 import background from '../../images/drive.png'
+import Button from '@mui/material/Button'
+import { Paper } from '@mui/material';
 export default function Home() {
 
     const [address, setAddress] = React.useState("");
@@ -31,43 +33,43 @@ export default function Home() {
       setAddress2(value2);
       setCoordinates2(latLng2);
     };
-
-    function checkLocations(){
-      if (coordinates.lat == null){
-        return "Please enter 2 locations."
-      }
-      if (coordinates.lng == null){
-        return "Please enter 2 locations."
-      }
-      if (coordinates2.lat == null){
-        return "Please enter 2 locations."
-      }
-      if (coordinates2.lng == null){
-        return "Please enter 2 locations."
-      }
-      else {
-        return "Please enter 2 locations."
-      }
-    }
+    const [midLat, setMidLat] = React.useState(0);
+    const [midLng, setMidLng] = React.useState(0);
+    const [midCountry, setMidCountry] = React.useState("");
+    const [midState, setMidState] = React.useState("");
+    const [midCity, setMidCity] = React.useState("");
 
     const [coordinatesMid, setCoordinatesMid] = React.useState({
       lat: null,
       lng: null
     });
 
-    var midLat = 0;
-    var midLon = 0;
-
-    function midPoint()
+    let mLat = 0;
+    let mLon = 0;
+    
+    function midPoint()       
     {
-      if(coordinates.lat == null)
+      setMidState("");
+      setMidCity("");
+      setMidCountry("");
+
+      if(coordinates.lat == null){
+        alert("Please enter 2 locations.");
         return;
+      }
       if(coordinates.lng == null)
+      {
+        alert("Please enter 2 locations.");
         return;
-      if(coordinates2.lat == null)
+      }
+      if(coordinates2.lat == null){
+        alert("Please enter 2 locations.");
         return;
-      if(coordinates2.lng == null)
+      }
+      if(coordinates2.lng == null){
+        alert("Please enter 2 locations.");
         return;
+      }
    
       let lat = coordinates.lat * (Math.PI / 180);
       let lng = coordinates.lng * (Math.PI / 180);
@@ -86,85 +88,124 @@ export default function Home() {
       let y = (y1 + y2) / 2;
       let z = (z1 + z2) / 2;
       
-      midLon = Math.atan2(y, x);
+      mLon = Math.atan2(y, x);
       let hyp = Math.sqrt((x*x) + (y*y));
-      midLat = Math.atan2(z, hyp);
+      mLat = Math.atan2(z, hyp);
 
-      midLat = midLat * (180 / Math.PI);
-      midLon = midLon * (180 / Math.PI);
+      mLat = mLat * (180 / Math.PI);
+      mLon = mLon * (180 / Math.PI);
 
-      alert(midLat + " " + midLon);
+      setMidLat(mLat);
+      setMidLng(mLon);
+      const KEY = 'YOUR_GOOGLE_API_KEY';
+      let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${mLat},${mLon}&key=${KEY}`;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          let parts = data.results[0].address_components;
+          parts.forEach (part => {
+              if(part.types.includes("country")){
+                setMidCountry(part.long_name);
+              }
+              
+              if(part.types.includes("locality")){
+                setMidCity(part.long_name);
+              }
+              
+              if(part.types.includes("administrative_area_level_1")){
+                setMidState(part.long_name);
+              }
+              
+          })
+            
+        })
     }
-
     return (
       <div>
-        <PlacesAutocomplete
-          value={address}
-          onChange={setAddress}
-          onSelect={handleSelect}
-        >
-          {
-            ({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-              <div>
-                <p>Latitude: {coordinates.lat}</p>
-                <p>Longitude: {coordinates.lng}</p>
-    
-                <input {...getInputProps({ placeholder: "Type address" })} />
-    
-                <div>
-                  {loading ? <div>...loading</div> : null}
-    
-                  {suggestions.map(suggestion => {
-                    const style = {
-                      backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
-                    };
-    
-                    return (
-                      <div {...getSuggestionItemProps(suggestion, { style })}>
-                        {suggestion.description}
+        <Box p={5}>
+          <Paper>
+            <Box p={5}>
+              <Box p = {3}>
+              <PlacesAutocomplete
+                value={address}
+                onChange={setAddress}
+                onSelect={handleSelect}
+              >
+                {
+                  ({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                    <div>
+                      <h3>Address 1</h3>
+                      <p>{address}</p>
+          
+                      <TextField id="outlined-basic" label="Address 1" variant="outlined" size="small" {...getInputProps({ placeholder: "Type address" })} />
+          
+                      <div>
+                        {loading ? <div>...loading</div> : null}
+          
+                        {suggestions.map(suggestion => {
+                          const style = {
+                            backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                          };
+                          return (
+                            <div {...getSuggestionItemProps(suggestion, { style })}>
+                              {suggestion.description}
+                            </div>
+                          );
+                        })}
                       </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )
-          }
-        </PlacesAutocomplete>
-
-
-        <PlacesAutocomplete
-          value={address2}
-          onChange={setAddress2}
-          onSelect={handleSelect2}
-        >
-          {
-            ({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-              <div>
-                <p>Latitude: {coordinates2.lat}</p>
-                <p>Longitude: {coordinates2.lng}</p>
-    
-                <input {...getInputProps({ placeholder: "Type address" })} />
-    
-                <div>
-                  {loading ? <div>...loading</div> : null}
-    
-                  {suggestions.map(suggestion => {
-                    const style = {
-                      backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
-                    };
-    
-                    return (
-                      <div {...getSuggestionItemProps(suggestion, { style })}>
-                        {suggestion.description}
+                    </div>
+                  )
+                }
+              </PlacesAutocomplete>
+              </Box>
+              <Box p={3}>
+              <PlacesAutocomplete
+                value={address2}
+                onChange={setAddress2}
+                onSelect={handleSelect2}
+              >
+                {
+                  ({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                    <div>
+                      <h3>Address 2</h3>
+                      <p>{address2}</p>
+          
+                      <TextField id="outlined-basic" label="Address 2" variant="outlined" size="small"{...getInputProps({ placeholder: "Type address" })} />
+          
+                      <div>
+                        {loading ? <div>...loading</div> : null}
+          
+                        {suggestions.map(suggestion => {
+                          const style = {
+                            backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                          };
+          
+                          return (
+                            <div {...getSuggestionItemProps(suggestion, { style })}>
+                              {suggestion.description}
+                            </div>
+                          );
+                        })}
                       </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )
-          }
-        </PlacesAutocomplete>
-        <button onClick={() => midPoint()}>Click me</button>
+                    </div>
+                  )
+                }
+              </PlacesAutocomplete>
+              </Box>
+              <Box p={3}>
+                <Button variant='contained' onClick={() => midPoint()}>Find Halfway</Button>
+              </Box>
+              <Box p={3}>
+                <p>Latitude: {midLat} Longitude: {midLng}</p>
+                <p>{midCountry}</p>
+                <p>{midState}</p>
+                <p>{midCity}</p>
+              </Box>
+            </Box>
+          </Paper>
+        </Box>   
       </div>
     )
 }

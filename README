@@ -15,7 +15,9 @@ INSTALLATION:
    -run "npm install react-icons"
    -run "npm install react-router-dom"
    -run "npm install styled-components"
-3. To run program, run command "npm start" and you will be redirected to web browser.
+3. For the map functionality to work replace "YOUR_GOOGLE_API_KEY" in Home.js and index.html with your personal
+   google maps api key. 
+4. To run program, run command "npm start" and you will be redirected to web browser.
 =============
 
 Below are the important links and documents for the project.
