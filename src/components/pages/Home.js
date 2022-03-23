@@ -198,7 +198,7 @@ export default function Home() {
                 <Button variant='contained' onClick={() => midPoint()}>Find Halfway</Button>
               </Box>
               <Box p={3}>
-                <p>Latitude: {midLat} Longitude: {midLng}</p>
+                <p>Latitude: {midLat} Longitude: {midLng} </p>
                 <p>{midCountry}</p>
                 <p>{midState}</p>
                 <p>{midCity}</p>
