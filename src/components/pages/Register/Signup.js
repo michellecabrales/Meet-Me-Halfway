@@ -1,5 +1,6 @@
 import React from 'react'
 import globe from '../../../images/Globe.png';
+import '../../../index.css'
 
 export class Signup extends React.Component {
 
@@ -10,7 +11,7 @@ export class Signup extends React.Component {
     render() {
         
      return (<div className="base-container"> 
-            <div className="header">Signup!</div>
+            <h1> Sign Up! </h1>
             <div className="content">
                  <div className="images">
                   <img src = {globe} alt = "globe" />
