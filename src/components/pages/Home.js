@@ -100,7 +100,7 @@ export default function Home() {
 
       setMidLat(mLat);
       setMidLng(mLon);
-      const KEY = 'AIzaSyD12kZ7jTtEAnu-J27j92gQltOQwN2Vux0';
+      const KEY = 'YOUR_GOOGLE_API_KEY';
       let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${mLat},${mLon}&key=${KEY}`;
 
       fetch(url)
