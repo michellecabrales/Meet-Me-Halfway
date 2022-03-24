@@ -1,5 +1,5 @@
 import React from 'react'
-import globe from '../../../images/Globe.jpg';
+import globe from '../../../images/Globe.png';
 
 export class Signup extends React.Component {
 
