@@ -141,7 +141,6 @@ export default function Home() {
                   ({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                     <div>
                       <h3>Address 1</h3>
-                      <p>{address}</p>
           
                       <TextField id="outlined-basic" label="Address 1" variant="outlined" size="small" {...getInputProps({ placeholder: "Type address" })} />
           
@@ -173,8 +172,7 @@ export default function Home() {
                 {
                   ({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                     <div>
-                      <h3>Address 2</h3>
-                      <p>{address2}</p>
+                      <h3>Address 2</h3>                    
           
                       <TextField id="outlined-basic" label="Address 2" variant="outlined" size="small"{...getInputProps({ placeholder: "Type address" })} />
           
