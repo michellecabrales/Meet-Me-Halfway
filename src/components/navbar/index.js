@@ -3,7 +3,7 @@ import SignupBtn from '../SignupBtn'
 import { Nav, NavLink, Bars, NavMenu } from './NavbarElements'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from '../pages/Home'
-import Login from '../pages/Login'
+import Login from '../pages/Login/Login'
 import Signup from '../pages/Register/Signup'
 import About from '../pages/About';
 const NavBar = () => {
