@@ -6,6 +6,7 @@ import { geocodeByAddress, geocodeByPlaceId, getLatLng } from 'react-places-auto
 import background from '../../images/drive.png'
 import Button from '@mui/material/Button'
 import { Paper } from '@mui/material';
+import MyGoogleMap from '../map/MyGoogleMap';
 export default function Home() {
 
     
@@ -99,7 +100,7 @@ export default function Home() {
 
       setMidLat(mLat);
       setMidLng(mLon);
-      const KEY = 'YOUR_GOOGLE_API_KEY';
+      const KEY = 'AIzaSyD12kZ7jTtEAnu-J27j92gQltOQwN2Vux0';
       let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${mLat},${mLon}&key=${KEY}`;
 
       fetch(url)
@@ -125,7 +126,8 @@ export default function Home() {
         })
     }
     return (
-      <div>
+      <div class="main">
+      <div>  
         <Box p={5}>
           <Paper>
             <Box p={5}>
@@ -208,6 +210,15 @@ export default function Home() {
             </Box>
           </Paper>
         </Box>   
+      </div>
+      <Box sx={{
+        my: 5,
+        mx: 5,
+        width: 1300,
+        flexDirection: 'row'
+      }}>
+<MyGoogleMap />
+        </Box>
       </div>
     )
 }
