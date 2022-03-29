@@ -6,11 +6,13 @@ import GoogleMapReact from 'google-map-react';
 import styled from 'styled-components';
 
 import Marker from './Marker';
+import { Paper, paperClasses } from '@mui/material';
 
 const Wrapper = styled.main`
   width: 100%;
   height: 150%;
 `;
+
 
 class MyGoogleMap extends Component {
 
@@ -153,12 +155,13 @@ class MyGoogleMap extends Component {
 
                 </GoogleMapReact>
 
+                <Paper>
                 <div className="info-wrapper">
                     <div className="map-details">Latitude: <span>{this.state.lat}</span>, Longitude: <span>{this.state.lng}</span></div>
                     <div className="map-details">Zoom: <span>{this.state.zoom}</span></div>
                     <div className="map-details">Address: <span>{this.state.address}</span></div>
                 </div>
-
+                </Paper>
 
             </Wrapper >
         );

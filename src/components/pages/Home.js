@@ -7,9 +7,7 @@ import background from '../../images/drive.png'
 import Button from '@mui/material/Button'
 import { Paper } from '@mui/material';
 import MyGoogleMap from '../map/MyGoogleMap';
-export default function Home() {
-
-    
+export default function Home() {  
 
     const [address, setAddress] = React.useState("");
     const [coordinates, setCoordinates] = React.useState({
@@ -141,9 +139,9 @@ export default function Home() {
                   ({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                     <div>
                       <h3>Address 1</h3>
-          
-                      <TextField id="outlined-basic" label="Address 1" variant="outlined" size="small" {...getInputProps({ placeholder: "Type address" })} />
-          
+                      <div class="address-field">
+                        <TextField id="outlined-basic" label="Address 1" variant="outlined" size="small" {...getInputProps({ placeholder: "Type address" })} />
+                      </div>
                       <div>
                         {loading ? <div>...loading</div> : null}
           
@@ -173,9 +171,9 @@ export default function Home() {
                   ({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                     <div>
                       <h3>Address 2</h3>                    
-          
-                      <TextField id="outlined-basic" label="Address 2" variant="outlined" size="small"{...getInputProps({ placeholder: "Type address" })} />
-          
+                      <div class="address-field">
+                        <TextField id="outlined-basic" label="Address 2" variant="outlined" size="small"{...getInputProps({ placeholder: "Type address" })} />
+                      </div>
                       <div>
                         {loading ? <div>...loading</div> : null}
           
@@ -212,11 +210,11 @@ export default function Home() {
       <Box sx={{
         my: 5,
         mx: 5,
-        width: 1300,
+        width: "70%",
         flexDirection: 'row'
       }}>
-<MyGoogleMap />
-        </Box>
+        <MyGoogleMap />
+      </Box>
       </div>
     )
 }
