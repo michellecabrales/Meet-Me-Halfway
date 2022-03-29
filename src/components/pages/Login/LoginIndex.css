@@ -13,7 +13,12 @@
     outline: none;
   }
   
+  .App{
+    height: 100vh;
+    align-items: center;
+    background-color: #535655;
 
+}
   
   form{
     display: block;
