@@ -1,20 +1,21 @@
-import React from 'react'
-import globe from '../../../images/Globe.png';
+import React , {useState} from 'react';
 import '../../../index.css'
 
-export class Signup extends React.Component {
+function Signup({Signup, error}) {
 
-   constructor(props) {
-       super(props);
+    const [details, setDetails] = useState({Username: "", Email: "", Password: ""});
+    
+    const submitHandler = e =>{
+        e.preventDefault();
+
+        Signup(details);
     }
-
-    render() {
         
      return (<div className="base-container"> 
-            <h1> Sign Up! </h1>
+            <h2> Sign Up! </h2>
             <div className="content">
                  <div className="images">
-                  <img src = {globe} alt = "globe" />
+                 
                 </div>
                 <div className="form">
                     <div className="form-gorup">
@@ -32,14 +33,14 @@ export class Signup extends React.Component {
                 </div>
             </div>
             <div className = "footer">
-                <button type = "button" className = "btn">
-                    Register
-                </button>
+                <input type = "submit" value = "Sign Up!"/>
+                
+               
             </div>
         </div>
      );
     }
 
-}
+
 export default Signup; 
 
