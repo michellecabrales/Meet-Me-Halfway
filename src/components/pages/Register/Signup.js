@@ -1,12 +1,8 @@
 import React from 'react'
-import globe from '../../../images/Globe.png';
-import '../../../index.css'
+import './Signup.css'
+//import Signuplogic from './Signuplogic';
 
 export class Signup extends React.Component {
-
-   constructor(props) {
-       super(props);
-    }
 
     render() {
         
@@ -14,24 +10,24 @@ export class Signup extends React.Component {
             <h1> Sign Up! </h1>
             <div className="content">
                  <div className="images">
-                  <img src = {globe} alt = "globe" />
+                
                 </div>
                 <div className="form">
-                    <div className="form-gorup">
-                        <label htmlFor="username">Username </label>
-                        <input type="text" name="username" placeholder = "username"/>
+                    <div className="form-group">
+                        <label htmlFor="username">Username: </label>
+                        <input type="text" name="username" placeholder = " Username"/>
                     </div>
-                    <div className="form-gorup">
-                        <label htmlFor="email">Email</label>
-                        <input type="text" name="email" placeholder = "email"/>
+                    <div className="form-group">
+                        <label htmlFor="email">Email: </label>
+                        <input type="text" name="email" placeholder = " Email"/>
                     </div>
-                    <div className="form-gorup">
-                        <label htmlFor="password">Password </label>
-                        <input type="password" name="password" placeholder = "password"/>
+                    <div className="form-group">
+                        <label htmlFor="password">Password: </label>
+                        <input type="password" name="password" placeholder = " Password"/>
                     </div>
                 </div>
             </div>
-            <div className = "footer">
+            <div className = "button-container">
                 <button type = "button" className = "btn">
                     Register
                 </button>
