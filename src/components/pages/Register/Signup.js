@@ -1,9 +1,10 @@
 import React , {useState} from 'react';
 import '../../../index.css'
+import './Signup.css'
 
-function Signup({Signup, error}) {
+function SignupPage({Signup, error}) {
 
-    const [details, setDetails] = useState({Username: "", Email: "", Password: ""});
+    const [details, setDetails] = useState({username: "", email: "", password: ""});
     
     const submitHandler = e =>{
         e.preventDefault();
@@ -11,36 +12,30 @@ function Signup({Signup, error}) {
         Signup(details);
     }
         
-     return (<div className="base-container"> 
-            <h2> Sign Up! </h2>
-            <div className="content">
-                 <div className="images">
-                 
+    return (
+        <form onsubmit={submitHandler}>
+            <div className = "form-inner">
+                <h2>Sign Up!</h2>
+                {(error !== "") ? (<div className = "error">{error}</div>) : ""}
+                <div className="credientials-group">
+                    <label htmlFor="username">Username:</label>
+                    <input type= "text" name = "username" id="username" onChange={e=> setDetails({...details, username: e.target.value})} value={details.username}/>
                 </div>
-                <div className="form">
-                    <div className="form-gorup">
-                        <label htmlFor="username">Username </label>
-                        <input type="text" name="username" placeholder = "username"/>
-                    </div>
-                    <div className="form-gorup">
-                        <label htmlFor="email">Email</label>
-                        <input type="text" name="email" placeholder = "email"/>
-                    </div>
-                    <div className="form-gorup">
-                        <label htmlFor="password">Password </label>
-                        <input type="password" name="password" placeholder = "password"/>
-                    </div>
+                <div className="credientials-group">
+                    <label htmlFor="email">Email:</label>
+                    <input type="email" name="email" id="email" onChange={e=> setDetails({...details, email: e.target.value})} value={details.email} />
                 </div>
-            </div>
-            <div className = "footer">
-                <input type = "submit" value = "Sign Up!"/>
+                <div className = "credientials-group">
+                    <label htmlFor="password">Password:</label>
+                    <input type = "password" name="password" id="password" onChange={e=> setDetails({...details, password: e.target.value})} value={details.password}/>
+                </div>
+                <button type = "submit" className ="btn" style = {{height: '30px', width : '85px'}} >Sign Up!</button>
                 
-               
             </div>
-        </div>
-     );
-    }
+        </form>
+    )
+}
 
 
-export default Signup; 
+export default SignupPage; 
 

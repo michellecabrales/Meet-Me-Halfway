@@ -1,12 +1,3 @@
-.btn{
-    color: rgb(0, 0, 0);
-    background-color: rgb(165, 61, 148);
-    border-radius: 5px;
-    font-size: larger;
-    display: block;
-    padding: 5px;
-    margin: 10px auto;
-  }
 
 .username{
     font-size: larger;
@@ -29,6 +20,23 @@ input[type="password"] {
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+input[type="text"],
+input[type="email"] {
+  height: 30px;
+  width: 200px; 
+  /* position */
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+input[type="text"],
+input[type="username"] {
+  height: 30px;
+  width: 200px; 
+  /* position */
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+
 .button-container {
     display: flex;
     justify-content: center;
@@ -39,10 +47,38 @@ input[type="password"] {
     font-size: 12px;
   }
 
-  .form-group {
+  .credientials-group {
     display: block;
    /* flex-direction: flex; */
     gap: 8px;
     margin: 10px;
   }
 
+  button[type=submit]{
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-image: linear-gradient(to right, #d075e7 50%, #7c53eb 50%, #9556be);
+    background-size: 200%;
+    background-position: 0%;
+    transition: 0.4s;
+    color: black;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+
+  form .form-inner input[type = "button"]:hover{
+    background-position: 100% 0%;
+  }
+  
+  /*.btn{
+    color: rgb(0, 0, 0);
+    background-color: rgb(165, 61, 148);
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }*/
