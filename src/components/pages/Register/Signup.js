@@ -1,41 +1,46 @@
-import React from 'react'
-import './Signup.css'
-//import Signuplogic from './Signuplogic';
+import React , {useState} from 'react';
+import '../../../index.css'
 
-export class Signup extends React.Component {
+function Signup({Signup, error}) {
 
-    render() {
+    const [details, setDetails] = useState({Username: "", Email: "", Password: ""});
+    
+    const submitHandler = e =>{
+        e.preventDefault();
+
+        Signup(details);
+    }
         
      return (<div className="base-container"> 
-            <h1> Sign Up! </h1>
+            <h2> Sign Up! </h2>
             <div className="content">
                  <div className="images">
-                
+                 
                 </div>
                 <div className="form">
-                    <div className="form-group">
-                        <label htmlFor="username">Username: </label>
-                        <input type="text" name="username" placeholder = " Username"/>
+                    <div className="form-gorup">
+                        <label htmlFor="username">Username </label>
+                        <input type="text" name="username" placeholder = "username"/>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="email">Email: </label>
-                        <input type="text" name="email" placeholder = " Email"/>
+                    <div className="form-gorup">
+                        <label htmlFor="email">Email</label>
+                        <input type="text" name="email" placeholder = "email"/>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Password: </label>
-                        <input type="password" name="password" placeholder = " Password"/>
+                    <div className="form-gorup">
+                        <label htmlFor="password">Password </label>
+                        <input type="password" name="password" placeholder = "password"/>
                     </div>
                 </div>
             </div>
-            <div className = "button-container">
-                <button type = "button" className = "btn">
-                    Register
-                </button>
+            <div className = "footer">
+                <input type = "submit" value = "Sign Up!"/>
+                
+               
             </div>
         </div>
      );
     }
 
-}
+
 export default Signup; 
 

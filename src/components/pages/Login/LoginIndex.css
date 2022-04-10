@@ -12,12 +12,13 @@
     border: none;
     outline: none;
   }
-
+  
   .App{
     height: 100vh;
-    background-color: #53565A;
-  }
+    align-items: center;
+    background-color: #535655;
 
+}
   
   form{
     display: block;
