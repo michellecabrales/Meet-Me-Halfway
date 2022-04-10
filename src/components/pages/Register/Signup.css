@@ -1,0 +1,48 @@
+.btn{
+    color: rgb(0, 0, 0);
+    background-color: rgb(165, 61, 148);
+    border-radius: 5px;
+    font-size: larger;
+    display: block;
+    padding: 5px;
+    margin: 10px auto;
+  }
+
+.username{
+    font-size: larger;
+    padding: 5px;
+    margin: 2px;
+}
+
+
+.password{
+    font-size: larger;
+    padding: 5px;
+    margin: 2px;
+}
+
+input[type="text"],
+input[type="password"] {
+  height: 30px;
+  width: 200px; 
+  position: flex;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .error {
+    color: red;
+    font-size: 12px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 10px;
+  }
+
