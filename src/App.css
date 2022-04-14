@@ -41,3 +41,16 @@
     transform: rotate(360deg);
   }
 }
+
+.Review{
+  position: relative;
+  top: 600px;
+  left: -1600px;
+  height: 30px;
+  max-width: 500px;
+  background-color: rgb(165, 61, 148);
+}
+.h4{
+  top: 600px;
+  left: -1600px;
+}
