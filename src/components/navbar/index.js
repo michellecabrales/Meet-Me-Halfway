@@ -6,6 +6,8 @@ import Home from '../pages/Home'
 import Login from '../pages/Login/Login'
 import Signup from '../pages/Register/Signup'
 import About from '../pages/About/About';
+import Dashboard from "../../Dashboard";
+
 const NavBar = () => {
     return (
         <>
@@ -19,6 +21,7 @@ const NavBar = () => {
                         <NavLink to="/about" activeStyle>About</NavLink>
                         <NavLink to="/login" activeStyle>Login</NavLink>
                         <NavLink to="/Sign-up"><SignupBtn /></NavLink>
+                        
                     </NavMenu>
                 </Nav>
                 <Routes>
@@ -26,6 +29,7 @@ const NavBar = () => {
                     <Route path="/About" element={<About />}/>
                     <Route path="/Login" element={<Login />}/>
                     <Route path="Sign-up" element={<Signup />}/>
+                    <Route path="Dashboard" element={<Dashboard />}/>
                 </Routes>
             </Router>
         </>
