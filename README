@@ -18,6 +18,7 @@ INSTALLATION:
    -run "npm install --save react-google-places-autocomplete"
    -run "npm install --save google-map-react"
    -run "npm install firebase"
+   -run "npm install react-bootstrap bootstrap"
 3. For the google places functionality to work, replace 'YOUR_GOOGLE_API_KEY' in 'Home.js' and 'index.html' with your personal google API key. 
 4. To run program, run command "npm start" and you will be redirected to web browser.
 =============
