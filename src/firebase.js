@@ -2,24 +2,46 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import 'firebase/auth'
+import {getAuth, GoogleAuthProvider, signInWithPopup, signOut} from 'firebase/auth'
 import { getDatabase } from "firebase/database"
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID
+  apiKey: "AIzaSyB5Izop7mxgSPW71u5NIOlso_GO8-X5ado",
+  authDomain: "registration-form-5914e.firebaseapp.com",
+  databaseURL: "https://registration-form-5914e-default-rtdb.firebaseio.com",
+  projectId: "registration-form-5914e",
+  storageBucket: "registration-form-5914e.appspot.com",
+  messagingSenderId: "864851409278",
+  appId: "1:864851409278:web:833ceedeeb224db1c59b2f"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const auth = app.auth()
+//export const auth = app.auth()
+export const auth = getAuth(app);
 export const database = getDatabase(app);
+const provider = new GoogleAuthProvider();
 
+export const signInWithGoogle = () => {
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      const name = result.user.displayName;
+      const email = result.user.email;
 
+      localStorage.setItem("name", name);
+      localStorage.setItem("email", email);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
+  export const logOut = () => {
+    auth.signOut().then(()=> {
+      console.log('logged out')
+    }).catch((error) => {
+      console.log(error.message)
+    })
+  }
