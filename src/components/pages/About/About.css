@@ -72,4 +72,45 @@
     position: relative; right: 50px;
   }
   
+/* tablet/phone size shrink compatability */
+
+@media screen and (max-width: 1024px) {
+  .about_container {
+
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  .about_me {
+
+    width: 50%;
+    margin: 2rem auto 4rem;
+
+  }
+
+  .about_content p {
+    margin: 1rem 0 1.5rem
+  }
+}  
+
+@media screen and (max-width: 60px) {
+  .about_me {
+    width: 65%;
+    margin: 0 auto 3rem;
+  }
+
+  .about_card {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .about_content {
+    text-align: center;
+  }
+
+  .about_card p {
+    margin: 1.5rem 0;
+  }
+  
+}
   
