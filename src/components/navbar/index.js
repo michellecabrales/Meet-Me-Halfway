@@ -1,13 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SignupBtn from "../SignupBtn";
 import { Nav, NavLink, Bars, NavMenu } from "./NavbarElements";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-  BrowserRouter,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate, BrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import Login from "../pages/Login/Login";
 import Signup from "../pages/Register/Signup";
@@ -15,12 +9,14 @@ import About from "../pages/About/About";
 import Dashboard from "../../Dashboard";
 import { logOut } from "../../firebase";
 import { Button } from "@mui/material";
+import { AppContext } from "../../AppContext";
 
 const NavBar = ({ user, loginfn, logoutfn }) => {
   let navigate = useNavigate();
 
   let [logged_in, setLoggedIn] = useState(false);
-  let logout = () => logoutfn();
+  // let logout = () => logoutfn();
+  let { logout } = useContext(AppContext);
 
   useEffect(() => {
     setLoggedIn(user);
@@ -59,10 +55,7 @@ const NavBar = ({ user, loginfn, logoutfn }) => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/About" element={<About />} />
-        <Route
-          path="/Login"
-          element={<Login loginfn={loginfn} user={user} />}
-        />
+        <Route path="/Login" element={<Login loginfn={loginfn} user={user} />} />
         <Route path="Sign-up" element={<Signup />} />
         <Route path="Dashboard" element={<Dashboard />} />
       </Routes>

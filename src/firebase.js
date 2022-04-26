@@ -3,8 +3,10 @@
 import { initializeApp } from "firebase/app";
 import "firebase/auth";
 import {
+  createUserWithEmailAndPassword,
   getAuth,
   GoogleAuthProvider,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
@@ -30,18 +32,19 @@ export const auth = getAuth(app);
 export const database = getDatabase(app);
 const provider = new GoogleAuthProvider();
 
+const onUserCredential = (userCredential) => {
+  let user = {
+    username: userCredential.user.displayName,
+    email: userCredential.user.email,
+    // uid: result.user.uid,
+  };
+
+  localStorage.setItem("user_info", JSON.stringify(user));
+  return user;
+};
 export const signInWithGoogle = () => {
   return signInWithPopup(auth, provider)
-    .then((result) => {
-      let user = {
-        username: result.user.displayName,
-        email: result.user.email,
-        uid: result.user.uid,
-      };
-
-      localStorage.setItem("user_info", JSON.stringify(user));
-      return user;
-    })
+    .then(onUserCredential)
     .catch((error) => {
       console.log(error);
     });
@@ -64,3 +67,20 @@ export const getUserFromStorage = () => {
   let user = localStorage.getItem("user_info") ?? "null";
   return JSON.parse(user);
 };
+
+export const signInWithEmailAndPassword_ = (email, password) =>
+  signInWithEmailAndPassword(auth, email, password)
+    .then(onUserCredential)
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
+
+export const signupWithEmailAndPassword = (email, password) =>
+  createUserWithEmailAndPassword(auth, email, password)
+    .then(onUserCredential)
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
