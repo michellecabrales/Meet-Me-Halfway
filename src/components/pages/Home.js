@@ -7,7 +7,16 @@ import background from '../../images/drive.png'
 import Button from '@mui/material/Button'
 import { Paper } from '@mui/material';
 import MyGoogleMap from '../map/MyGoogleMap';
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+
 export default function Home() {  
+  const themebtn = createTheme({
+    palette: {
+        primary:{
+            main: "#15cdfc",
+        } 
+    }
+  });
 
     const [address, setAddress] = React.useState("");
     const [coordinates, setCoordinates] = React.useState({
@@ -98,7 +107,7 @@ export default function Home() {
 
       setMidLat(mLat);
       setMidLng(mLon);
-      const KEY = 'YOUR_GOOGLE_API_KEY';
+      const KEY = 'AIzaSyAmvUSH7nyn-WJnJtOcAUSHD2yWgii87MY';
       let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${mLat},${mLon}&key=${KEY}`;
 
       fetch(url)
@@ -195,7 +204,9 @@ export default function Home() {
               </PlacesAutocomplete>
               </Box>
               <Box p={3}>
+                <ThemeProvider theme={themebtn}>
                 <Button variant='contained' onClick={() => midPoint()}>Find Halfway</Button>
+                </ThemeProvider>
               </Box>
               <Box p={3}>
                 <p>Latitude: {midLat} Longitude: {midLng} </p>

@@ -9,7 +9,17 @@ import Button from '@mui/material/Button'
 import MyGoogleMap from './components/map/MyGoogleMap';
 import './App.css'
 import { Link } from "react-router-dom";
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+
 export default function Home() {  
+
+    const themebtn = createTheme({
+      palette: {
+          primary:{
+              main: "#15cdfc",
+          } 
+      }
+    });
 
 const [address, setAddress] = React.useState("");
 const [coordinates, setCoordinates] = React.useState({
@@ -201,7 +211,9 @@ return (
           </PlacesAutocomplete>
           </Box>
           <Box p={3}>
+          <ThemeProvider theme={themebtn}>
             <Button variant='contained' onClick={() => midPoint()}>Find Halfway</Button>
+          </ThemeProvider>
           </Box>
           <Box p={3}>
             <p>Latitude: {midLat} Longitude: {midLng} </p>

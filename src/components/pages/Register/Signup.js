@@ -1,11 +1,22 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Signup.css";
-import { Container, Button, Row, Col, Form, FormControl } from "react-bootstrap";
+import { Container, Row, Col, Form, FormControl } from "react-bootstrap";
 import "./Signup.css";
 import { AppContext } from "../../../AppContext";
+import Button from '@mui/material/Button'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+
 
 function Signup() {
+ 
+    const themebtn = createTheme({
+      palette: {
+          primary:{
+              main: "#15cdfc",
+          } 
+      }
+    });
   let { signUpWithEmailAndPassword } = useContext(AppContext);
 
   let defaultData = {
@@ -82,9 +93,11 @@ function Signup() {
                 <Form.Control.Feedback type="invalid"></Form.Control.Feedback>
               </Form.Group>
             </div>
-            <Button type="submit" className="btn" style={{ height: "30px", width: "85px" }}>
-            <Link to= "/Dashboard">Sign up </Link>
-            </Button>
+            <ThemeProvider theme={themebtn}>
+              <Button variant="contained">
+              <Link to= "/Dashboard">Sign up </Link>
+              </Button>
+            </ThemeProvider>
           </Form>
 
           <p className="mt-2">
