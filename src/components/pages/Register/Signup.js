@@ -83,7 +83,7 @@ function Signup() {
               </Form.Group>
             </div>
             <Button type="submit" className="btn" style={{ height: "30px", width: "85px" }}>
-              Sign up
+            <Link to= "/Dashboard">Sign up </Link>
             </Button>
           </Form>
 

@@ -10,6 +10,7 @@ import Dashboard from "../../Dashboard";
 import { logOut } from "../../firebase";
 import { Button } from "@mui/material";
 import { AppContext } from "../../AppContext";
+import AccountTest from "../AccountTest";
 
 const NavBar = ({ user, loginfn, logoutfn }) => {
   let navigate = useNavigate();
@@ -58,6 +59,7 @@ const NavBar = ({ user, loginfn, logoutfn }) => {
         <Route path="/Login" element={<Login loginfn={loginfn} user={user} />} />
         <Route path="Sign-up" element={<Signup />} />
         <Route path="Dashboard" element={<Dashboard />} />
+        <Route path ="AccountTest" element = {<AccountTest />} />
       </Routes>
     </>
   );
