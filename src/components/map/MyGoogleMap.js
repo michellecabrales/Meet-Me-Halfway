@@ -10,7 +10,7 @@ import { Paper, paperClasses } from '@mui/material';
 
 const Wrapper = styled.main`
   width: 100%;
-  height: 150%;
+  height: 100%;
 `;
 
 

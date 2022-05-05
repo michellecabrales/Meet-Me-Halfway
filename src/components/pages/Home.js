@@ -18,6 +18,19 @@ export default function Home() {
     }
   });
 
+    const [place1, setPlace1] = React.useState("");
+    const [place2, setPlace2] = React.useState("");
+    const [place3, setPlace3] = React.useState("");
+
+    const [place1Pic, setPlace1Pic] = React.useState("");
+    const [place2Pic, setPlace2Pic] = React.useState("");
+    const [place3Pic, setPlace3Pic] = React.useState("");
+
+    const [place1ID, setPlace1ID] = React.useState("");
+    const [place2ID, setPlace2ID] = React.useState("");
+    const [place3ID, setPlace3ID] = React.useState("");   
+
+    
     const [address, setAddress] = React.useState("");
     const [coordinates, setCoordinates] = React.useState({
       lat: null,
@@ -131,101 +144,148 @@ export default function Home() {
           })
             
         })
+
+
+        const url2 = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${mLat},${mLon}&rankby=distance&type=restaurant&key=${KEY}`;
+        fetch(url2)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          let sum = 0;
+          for (let i = 0; i < data.results.length; i++) {
+            sum = sum + 1;
+            if(i == 0){
+              setPlace1(data.results[i].name);
+              setPlace1ID(data.results[i].place_id);
+            }
+            if(i == 1){
+              setPlace2(data.results[i].name);
+              setPlace2ID(data.results[i].place_id);
+            }
+            if(i == 2)
+            {
+              setPlace3(data.results[i].name);
+              setPlace3ID(data.results[i].place_id);
+            }
+          }         
+        })
+
+          let urlplace1 = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place1ID}&key=${KEY}`;
+          fetch(urlplace1)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+          })
+
+         let urlplace2 = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place2ID}&key=${KEY}`;
+          fetch(urlplace2)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+          })
+
+          let urlplace3 = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place3ID}&key=${KEY}`;
+          fetch(urlplace3)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);        
+          })
+
     }
     return (
       <div class="main">
-      <div>  
-        <Box p={5}>
-          <Paper>
-            <Box p={5}>
-              <Box p = {3}>
-              <PlacesAutocomplete
-                value={address}
-                onChange={setAddress}
-                onSelect={handleSelect}
-              >
-                {
-                  ({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                    <div>
-                      <h3>Address 1</h3>
-                      <div class="address-field">
-                        <TextField id="outlined-basic" label="Address 1" variant="outlined" size="small" {...getInputProps({ placeholder: "Type address" })} />
-                      </div>
+        <div>  
+          <Box p={5}>
+            <Paper>
+              <Box p={5}>
+                <Box p = {3}>
+                  <PlacesAutocomplete
+                    value={address}
+                    onChange={setAddress}
+                    onSelect={handleSelect}
+                  >
+                  {
+                    ({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                       <div>
-                        {loading ? <div>...loading</div> : null}
-          
-                        {suggestions.map(suggestion => {
-                          const style = {
-                            backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
-                          };
-                          return (
-                            <div {...getSuggestionItemProps(suggestion, { style })}>
-                              {suggestion.description}
-                            </div>
-                          );
-                        })}
+                        <h3>Address 1</h3>
+                        <div class="address-field">
+                          <TextField id="outlined-basic" label="Address 1" variant="outlined" size="small" {...getInputProps({ placeholder: "Type address" })} />
+                        </div>
+                        <div>
+                          {loading ? <div>...loading</div> : null}
+            
+                          {suggestions.map(suggestion => {
+                            const style = {
+                              backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                            };
+                            return (
+                              <div {...getSuggestionItemProps(suggestion, { style })}>
+                                {suggestion.description}
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
-                    </div>
-                  )
-                }
-              </PlacesAutocomplete>
-              </Box>
-              <Box p={3}>
-              <PlacesAutocomplete
-                value={address2}
-                onChange={setAddress2}
-                onSelect={handleSelect2}
-              >
-                {
-                  ({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                    <div>
-                      <h3>Address 2</h3>                    
-                      <div class="address-field">
-                        <TextField id="outlined-basic" label="Address 2" variant="outlined" size="small"{...getInputProps({ placeholder: "Type address" })} />
-                      </div>
+                    )
+                  }
+                  </PlacesAutocomplete>
+                </Box>
+                <Box p={3}>
+                  <PlacesAutocomplete
+                    value={address2}
+                    onChange={setAddress2}
+                    onSelect={handleSelect2}
+                  >
+                  {
+                    ({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                       <div>
-                        {loading ? <div>...loading</div> : null}
-          
-                        {suggestions.map(suggestion => {
-                          const style = {
-                            backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
-                          };
-          
-                          return (
-                            <div {...getSuggestionItemProps(suggestion, { style })}>
-                              {suggestion.description}
-                            </div>
-                          );
-                        })}
+                        <h3>Address 2</h3>                    
+                        <div class="address-field">
+                          <TextField id="outlined-basic" label="Address 2" variant="outlined" size="small"{...getInputProps({ placeholder: "Type address" })} />
+                        </div>
+                        <div>
+                          {loading ? <div>...loading</div> : null}
+            
+                          {suggestions.map(suggestion => {
+                            const style = {
+                              backgroundColor: suggestion.active ? "#41b6e6" : "#fff"
+                            };
+            
+                            return (
+                              <div {...getSuggestionItemProps(suggestion, { style })}>
+                                {suggestion.description}
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
-                    </div>
-                  )
-                }
-              </PlacesAutocomplete>
+                    )
+                  }
+                  </PlacesAutocomplete>
+                </Box>
+                <Box p={3}>
+                  <ThemeProvider theme={themebtn}>
+                  <Button variant='contained' onClick={() => midPoint()}>Find Halfway</Button>
+                  </ThemeProvider>
+                </Box>
+                <Box p={3}>
+                  <p>{midCountry}</p>
+                  <p>{midState}</p>
+                  <p>{midCity}</p>
+                  <b>Location 1:</b>
+                  <p>{place1}</p>
+                  <b>Location 2:</b>
+                  <p>{place2}</p>
+                  <b>Location 3:</b>
+                  <p>{place3}</p>
+                </Box>
               </Box>
-              <Box p={3}>
-                <ThemeProvider theme={themebtn}>
-                <Button variant='contained' onClick={() => midPoint()}>Find Halfway</Button>
-                </ThemeProvider>
-              </Box>
-              <Box p={3}>
-                <p>Latitude: {midLat} Longitude: {midLng} </p>
-                <p>{midCountry}</p>
-                <p>{midState}</p>
-                <p>{midCity}</p>
-              </Box>
-            </Box>
-          </Paper>
-        </Box>   
-      </div>
-      <Box sx={{
-        my: 5,
-        mx: 5,
-        width: "70%",
-        flexDirection: 'row'
-      }}>
-        <MyGoogleMap />
-      </Box>
-      </div>
+            </Paper>
+          </Box>   
+        </div>
+        <Box sx={{my: 5,mx: 5,width: "70%",flexDirection: 'row'}}>
+          <MyGoogleMap />
+        </Box>
+      </div> 
     )
 }
