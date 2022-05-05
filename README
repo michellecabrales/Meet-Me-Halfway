@@ -21,6 +21,10 @@ INSTALLATION:
    -run "npm install react-bootstrap bootstrap"
 3. For the google places functionality to work, replace 'YOUR_GOOGLE_API_KEY' in 'Home.js' "MyGoogleMap.js' and 'index.html' with your personal google API key. 
 4. To run program, run command "npm start" and you will be redirected to web browser.
+5. Due to a bug in the API return header, you must download this chrome extension: 
+   https://chrome.google.com/webstore/detail/moesif-origin-cors-change/digfbfaphojjndkpccljibejjbppifbc/related?hl=en-US 
+   Enable the extension when viewing the project for the full functionality. 
+
 =============
 
 Below are the important links and documents for the project.
