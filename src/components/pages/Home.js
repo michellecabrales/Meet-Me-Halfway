@@ -17,18 +17,18 @@ export default function Home() {
         } 
     }
   });
-
+    const KEY = 'MY_GOOGLE_API_KEY';
     const [place1, setPlace1] = React.useState("");
     const [place2, setPlace2] = React.useState("");
     const [place3, setPlace3] = React.useState("");
 
-    const [place1Pic, setPlace1Pic] = React.useState("");
-    const [place2Pic, setPlace2Pic] = React.useState("");
-    const [place3Pic, setPlace3Pic] = React.useState("");
-
     const [place1ID, setPlace1ID] = React.useState("");
     const [place2ID, setPlace2ID] = React.useState("");
-    const [place3ID, setPlace3ID] = React.useState("");   
+    const [place3ID, setPlace3ID] = React.useState("");  
+    
+    const [place1Vicinity, setPlace1Vicinity] = React.useState("");
+    const [place2Vicinity, setPlace2Vicinity] = React.useState("");
+    const [place3Vicinity, setPlace3Vicinity] = React.useState("");
 
     
     const [address, setAddress] = React.useState("");
@@ -120,9 +120,9 @@ export default function Home() {
 
       setMidLat(mLat);
       setMidLng(mLon);
-      const KEY = 'YOUR_GOOGLE_API_KEY';
       let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${mLat},${mLon}&key=${KEY}`;
 
+      //fetching information for the mid point
       fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -144,37 +144,59 @@ export default function Home() {
           })
             
         })
-
-
-        const url2 = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${mLat},${mLon}&rankby=distance&type=restaurant&key=${KEY}`;
-        fetch(url2)
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-          let sum = 0;
-          for (let i = 0; i < data.results.length; i++) {
-            sum = sum + 1;
-            if(i == 0){
-              setPlace1(data.results[i].name);
-              setPlace1ID(data.results[i].place_id);
-            }
-            if(i == 1){
-              setPlace2(data.results[i].name);
-              setPlace2ID(data.results[i].place_id);
-            }
-            if(i == 2)
-            {
-              setPlace3(data.results[i].name);
-              setPlace3ID(data.results[i].place_id);
-            }
-          }         
-        })
-
-          let urlplace1 = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place1ID}&key=${KEY}`;
+          findMidPointLocations();
+          findPlaceDetails();
+    }
+    function findMidPointLocations()//fetching places around the mid point location using api search
+    {
+      let sb = document.querySelector('#location-type');
+      let choice = sb.selectedIndex;
+      let placeType = "";
+      switch(choice){
+        case 0:
+          placeType = "restaurant";
+          break;
+        case 1:
+          placeType = "park";
+          break;
+        case 2:
+          placeType = "store";
+          break;
+        case 3:
+          placeType = "atm";
+          break;        
+      }
+      const url2 = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${mLat},${mLon}&rankby=distance&type=${placeType}&key=${KEY}`;
+      fetch(url2)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        let sum = 0;
+        for (let i = 0; i < data.results.length; i++) {
+          sum = sum + 1;
+          if(i == 0){
+            setPlace1(data.results[i].name);
+            setPlace1ID(data.results[i].place_id);
+          }
+          if(i == 1){
+            setPlace2(data.results[i].name);
+            setPlace2ID(data.results[i].place_id);
+          }
+          if(i == 2)
+          {
+            setPlace3(data.results[i].name);
+            setPlace3ID(data.results[i].place_id);
+          }
+        }         
+      })
+    }
+    function findPlaceDetails(){
+      let urlplace1 = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place1ID}&key=${KEY}`;
           fetch(urlplace1)
           .then(response => response.json())
           .then(data => {
             console.log(data);
+            setPlace1Vicinity(data.result.vicinity);
           })
 
          let urlplace2 = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place2ID}&key=${KEY}`;
@@ -182,15 +204,16 @@ export default function Home() {
           .then(response => response.json())
           .then(data => {
             console.log(data);
+            setPlace2Vicinity(data.result.vicinity);
           })
 
           let urlplace3 = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place3ID}&key=${KEY}`;
           fetch(urlplace3)
           .then(response => response.json())
           .then(data => {
-            console.log(data);        
+            console.log(data); 
+            setPlace3Vicinity(data.result.vicinity);       
           })
-
     }
     return (
       <div class="main">
@@ -262,8 +285,17 @@ export default function Home() {
                     )
                   }
                   </PlacesAutocomplete>
+                  <Box p={3}>
+                  <h3>Choose a location type:</h3>
+                  <select name="location-type" id="location-type">      
+                      <option value="restaurant">Restaurant</option>
+                      <option value="park">Park</option>                                     
+                      <option value="store">Store</option>
+                      <option value="atm">ATM</option>                  
+                  </select>
+                  </Box>
                 </Box>
-                <Box p={3}>
+                <Box>
                   <ThemeProvider theme={themebtn}>
                   <Button variant='contained' onClick={() => midPoint()}>Find Halfway</Button>
                   </ThemeProvider>
@@ -272,12 +304,23 @@ export default function Home() {
                   <p>{midCountry}</p>
                   <p>{midState}</p>
                   <p>{midCity}</p>
-                  <b>Location 1:</b>
-                  <p>{place1}</p>
-                  <b>Location 2:</b>
-                  <p>{place2}</p>
-                  <b>Location 3:</b>
-                  <p>{place3}</p>
+                  <Box p={3}sx={{backgroundColor: "#ADD8E6"}}>
+                    <b>Location 1:</b>
+                    <p>{place1}</p>
+                    <i>{place1Vicinity}</i>
+                  </Box>
+                  <br/>
+                  <Box p={3}sx={{backgroundColor: "#ADD8E6"}}>
+                    <b>Location 2:</b>
+                    <p>{place2}</p>
+                    <p>{place2Vicinity}</p>
+                  </Box>
+                  <br/>
+                  <Box p={3}sx={{backgroundColor: "#ADD8E6"}}>
+                    <b>Location 3:</b>
+                    <p>{place3}</p>
+                    <p>{place3Vicinity}</p>
+                  </Box>
                 </Box>
               </Box>
             </Paper>
