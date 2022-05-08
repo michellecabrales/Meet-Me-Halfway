@@ -292,6 +292,8 @@ export default function Home() {
                   </ThemeProvider>
                 </Box>
                 <Box p={3}>
+                  <p>{midState}</p>
+                  <p>{setMidCity}</p>
                   <Box p={3}sx={{backgroundColor: "#ADD8E6"}}>
                     <b>Location 1:</b>
                     <p>{place1}</p>
