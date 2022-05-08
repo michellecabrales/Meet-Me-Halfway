@@ -1,3 +1,4 @@
+//This is the Signup button on the top of the navBar design
 import React from 'react'
 import Button from '@mui/material/Button';
 import { createTheme, ThemeProvider } from '@mui/material/styles'
