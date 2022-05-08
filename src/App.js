@@ -34,7 +34,7 @@ function App() {
 
   const _signUpWithEmailAndPassword = (email, password) =>
     signupWithEmailAndPassword(email, password).then((user) => {
-      setUser(user);
+      return setUser(user);
     }).catch(console.err);
 
   const value = {

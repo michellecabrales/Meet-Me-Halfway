@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import { useContext, useEffect, useState } from "react";
 import { Container, Stack, TextField } from "@mui/material";
 import { AppContext } from "../../../AppContext";
+import { useNavigate } from "react-router";
 //import "bootstrap/dist/css/bootstrap.min.css"
 
 /**
@@ -15,6 +16,8 @@ function Login({ user, loginfn }) {
 
   let [/**@type UserInfo*/ user_local, setUser] = useState(null);
 
+  const navigate = useNavigate();
+
   useEffect(() => setUser(user), [user]);
 
   // let signIn = () => loginfn();
@@ -23,8 +26,10 @@ function Login({ user, loginfn }) {
     event.preventDefault();
     let { password } = event.target.elements;
 
-    signInWithEmailAndPassword(event.target.elements.email.value, password.value);
+    signInWithEmailAndPassword(event.target.elements.email.value, password.value).then((user) => navigate("/"));
   };
+
+  const handleSignInWithGoogle = () => signInWithGoogle().then((user) => navigate("/"));
 
   return (
     <>
@@ -58,7 +63,7 @@ function Login({ user, loginfn }) {
               </Button>
             </Stack>
 
-            <Button variant="text" onClick={signInWithGoogle} xs={{ "margin-top": "2rem" }}>
+            <Button variant="text" onClick={handleSignInWithGoogle} xs={{ "margin-top": "2rem" }}>
               {" "}
               Sign In With Google
             </Button>

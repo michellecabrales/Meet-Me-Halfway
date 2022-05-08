@@ -1,22 +1,20 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css";
 import { Container, Row, Col, Form, FormControl } from "react-bootstrap";
 import "./Signup.css";
 import { AppContext } from "../../../AppContext";
-import Button from '@mui/material/Button'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-
+import Button from "@mui/material/Button";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function Signup() {
- 
-    const themebtn = createTheme({
-      palette: {
-          primary:{
-              main: "#15cdfc",
-          } 
-      }
-    });
+  const themebtn = createTheme({
+    palette: {
+      primary: {
+        main: "#15cdfc",
+      },
+    },
+  });
   let { signUpWithEmailAndPassword } = useContext(AppContext);
 
   let defaultData = {
@@ -29,6 +27,7 @@ function Signup() {
   // defaultData = { email: `fake_math${Math.floor(Math.random()*400)}@domain.com`, password: "password", password_confirm: "password" }
 
   const [state, setState] = useState(defaultData);
+  const navigate = useNavigate()
 
   let onChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -44,7 +43,7 @@ function Signup() {
     }
     console.log("Sign up " + email + " " + password);
 
-    signUpWithEmailAndPassword(email, password);
+    signUpWithEmailAndPassword(email, password).then((user)=> navigate('/'),(err)=>alert(err));
   };
 
   return (
@@ -94,8 +93,8 @@ function Signup() {
               </Form.Group>
             </div>
             <ThemeProvider theme={themebtn}>
-              <Button variant="contained">
-              <Link to= "/Dashboard">Sign up </Link>
+              <Button type="submit" className="btn" style={{ height: "30px" }} variant="contained">
+                Sign up
               </Button>
             </ThemeProvider>
           </Form>
