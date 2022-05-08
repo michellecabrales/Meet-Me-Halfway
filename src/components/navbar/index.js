@@ -53,7 +53,7 @@ const NavBar = ({ user, loginfn, logoutfn }) => {
           {showLoginOrLogoutButton(logged_in, logout)}
         </NavMenu>
       </Nav>
-      <Routes>
+      <Routes>//Redirect to different pages
         <Route path="/" element={<Home />} />
         <Route path="/About" element={<About />} />
         <Route path="/Login" element={<Login loginfn={loginfn} user={user} />} />
